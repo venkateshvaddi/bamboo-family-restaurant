@@ -1,38 +1,483 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Poppins:wght@400;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #f1f8f0;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* HEADER */
+.header {
+  position: relative;
   text-align: center;
+  padding: 25px 60px;
+  background: linear-gradient(135deg, #2e7d32, #66bb6a);
+  border-radius: 16px;
+  color: white;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.restaurant-title {
+  font-family: "Baloo 2", cursive;
+  font-size: 2.8rem;
+  margin: 0;
+  letter-spacing: 1px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.leaf {
+  position: absolute;
+  font-size: 2.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.9;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.leaf-left {
+  left: 12px;
+  transform: translateY(-50%) rotate(-20deg);
+}
+
+.leaf-right {
+  right: 12px;
+  transform: translateY(-50%) rotate(20deg) scaleX(-1);
+}
+
+.bamboo-green {
+  color: #c8f7c5;
+  font-weight: 800;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.tagline {
+  margin-top: 6px;
+  font-size: 1rem;
+  font-style: italic;
+  opacity: 0.95;
+}
+
+/* TABLE SECTION */
+.table-section {
+  margin-bottom: 25px;
+}
+
+.table-section h2,
+.menu-section h2,
+.order-section h2,
+.return-section h2 {
+  color: #2e7d32;
+  border-bottom: 3px solid #a5d6a7;
+  display: inline-block;
+  padding-bottom: 4px;
+  margin-bottom: 14px;
+}
+
+.table-grid {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.table-btn {
+  padding: 8px 14px;
+  border: 2px solid #66bb6a;
+  background: white;
+  color: #2e7d32;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.table-btn:hover {
+  background: #e8f5e9;
+}
+
+.table-btn.active {
+  background: #2e7d32;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* CATEGORY FILTER */
+.category-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.cat-btn {
+  padding: 8px 18px;
+  border: none;
+  border-radius: 20px;
+  background: #c8e6c9;
+  color: #1b5e20;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.cat-btn:hover {
+  background: #a5d6a7;
+}
+
+.cat-btn.active {
+  background: #2e7d32;
+  color: white;
+}
+
+/* ADD ITEM FORM */
+.add-item-section {
+  background: white;
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 25px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+}
+
+.add-item-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.add-item-form input,
+.add-item-form select {
+  padding: 8px 10px;
+  border: 2px solid #a5d6a7;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  flex: 1;
+  min-width: 140px;
+}
+
+.add-item-form input:focus,
+.add-item-form select:focus {
+  outline: none;
+  border-color: #2e7d32;
+}
+
+/* SEARCH BAR */
+.search-section {
+  margin-bottom: 16px;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #a5d6a7;
+  border-radius: 25px;
+  font-size: 1rem;
+}
+
+.search-bar:focus {
+  outline: none;
+  border-color: #2e7d32;
+}
+
+/* ORDER HEADER WITH CANCEL */
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cancel-btn {
+  background: #757575;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.cancel-btn:hover {
+  background: #424242;
+}
+
+.tag.ColdDrinks {
+  background: #b3e5fc;
+  color: #01579b;
+}
+
+/* MENU GRID */
+.menu-section {
+  margin-bottom: 30px;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 18px;
+}
+
+.card {
+  background: white;
+  border-radius: 14px;
+  padding: 14px;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.food-img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+
+.card h3 {
+  margin: 6px 0;
+  color: #1b5e20;
+  font-size: 1.05rem;
+}
+
+.tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.tag.Veg {
+  background: #c8e6c9;
+  color: #1b5e20;
+}
+
+.tag.NonVeg {
+  background: #ffcdd2;
+  color: #b71c1c;
+}
+
+.tag.Snacks {
+  background: #fff9c4;
+  color: #f57f17;
+}
+
+.price {
+  font-weight: 700;
+  color: #2e7d32;
+  margin: 6px 0;
+}
+
+.add-btn {
+  background: #2e7d32;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.add-btn:hover {
+  background: #1b5e20;
+}
+
+/* ORDERS */
+.order-section,
+.return-section {
+  background: white;
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 25px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.mini-img {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.order-name {
+  flex: 1;
+  font-weight: 600;
+  color: #333;
+}
+
+.order-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.return-btn {
+  background: #fb8c00;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.95rem;
+  min-height: 44px;
+}
+
+.return-btn:hover {
+  background: #ef6c00;
+}
+
+.delete-btn {
+  background: #e53935;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.95rem;
+  min-height: 44px;
+}
+
+.delete-btn:hover {
+  background: #b71c1c;
+}
+
+.empty-text {
+  color: #888;
+  font-style: italic;
+}
+
+.total {
+  text-align: right;
+  color: #2e7d32;
+  margin-top: 12px;
+  font-size: 1.4rem;
+}
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding: 14px;
+  color: #2e7d32;
+  font-weight: 600;
+  border-top: 2px solid #c8e6c9;
+  margin-top: 20px;
+}
+
+/* ==================== MOBILE RESPONSIVE ==================== */
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .header {
+    padding: 18px 45px;
+  }
+
+  .restaurant-title {
+    font-size: 1.6rem;
+  }
+
+  .leaf {
+    font-size: 1.6rem;
+  }
+
+  .leaf-left {
+    left: 6px;
+  }
+
+  .leaf-right {
+    right: 6px;
+  }
+
+  .tagline {
+    font-size: 0.8rem;
+  }
+
+  .table-grid {
+    gap: 6px;
+  }
+
+  .table-btn {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+  }
+
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .food-img {
+    height: 90px;
+  }
+
+  .card h3 {
+    font-size: 0.9rem;
+  }
+
+  .add-item-form {
+    flex-direction: column;
+  }
+
+  .add-item-form input,
+  .add-item-form select {
+    width: 100%;
+  }
+
+  /* Stack each order item vertically for clarity on phones */
+  .order-item {
+    flex-wrap: wrap;
+  }
+
+  .order-name {
+    width: 100%;
+    order: 1;
+  }
+
+  .mini-img {
+    order: 0;
+  }
+
+  .order-actions {
+    width: 100%;
+    order: 2;
+    margin-top: 6px;
+  }
+
+  .order-actions button {
+    flex: 1;
+  }
+
+  .order-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cancel-btn {
+    width: 100%;
   }
 }
