@@ -123,6 +123,9 @@ const menuItems = [
   },
 ];
 
+const ADMIN_USERNAME = "admin";
+const ADMIN_PASSWORD = "bamboo123";
+
 const tables = Array.from({ length: 20 }, (_, i) => `Table ${i + 1}`);
 const categories = ["All", "Veg", "Non-Veg", "Snacks", "Cold Drinks"];
 
@@ -133,6 +136,11 @@ function App() {
   // orders & returns are stored PER TABLE
   // structure: { "Table 1": [items...], "Table 2": [...] }
   const [searchTerm, setSearchTerm] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+  const [loginUser, setLoginUser] = useState("");
+  const [loginPass, setLoginPass] = useState("");
+  const [loginError, setLoginError] = useState("");
   const [orders, setOrders] = useState({});
   const [returnedItems, setReturnedItems] = useState({});
   const [customMenu, setCustomMenu] = useState([]);
@@ -202,7 +210,21 @@ function App() {
     0
   );
 
-  const cancelAllOrders = () => {
+  const handleLogin = () => {
+    if (loginUser === ADMIN_USERNAME && loginPass === ADMIN_PASSWORD) {
+      setIsAdmin(true);
+      setShowLogin(false);
+      setLoginError("");
+      setLoginUser("");
+      setLoginPass("");
+    } else {
+      setLoginError("Invalid username or password");
+    }
+  };
+
+  const handleLogout = () => {
+    setIsAdmin(false);
+  };
     if (currentOrders.length === 0) return;
     if (window.confirm(`Cancel all orders for ${selectedTable}?`)) {
       setOrders({ ...orders, [selectedTable]: [] });
@@ -228,7 +250,47 @@ function App() {
         </h1>
         <span className="leaf leaf-right">🎋</span>
         <p className="tagline">Fresh Taste • Warm Hospitality • Pure Veg & Non-Veg</p>
+
+        {isAdmin ? (
+          <button className="admin-btn" onClick={handleLogout}>
+            🔓 Logout Admin
+          </button>
+        ) : (
+          <button className="admin-btn" onClick={() => setShowLogin(true)}>
+            🔒 Admin Login
+          </button>
+        )}
       </header>
+
+      {/* ADMIN LOGIN MODAL */}
+      {showLogin && (
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <h2>Admin Login</h2>
+            <input
+              type="text"
+              placeholder="Username"
+              value={loginUser}
+              onChange={(e) => setLoginUser(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={loginPass}
+              onChange={(e) => setLoginPass(e.target.value)}
+            />
+            {loginError && <p className="login-error">{loginError}</p>}
+            <div className="modal-actions">
+              <button className="add-btn" onClick={handleLogin}>
+                Login
+              </button>
+              <button className="cancel-btn" onClick={() => setShowLogin(false)}>
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* TABLE SELECTOR */}
       <div className="table-section">
@@ -270,7 +332,8 @@ function App() {
         ))}
       </div>
 
-      {/* ADD NEW FOOD ITEM FORM */}
+      {/* ADD NEW FOOD ITEM FORM (ADMIN ONLY) */}
+      {isAdmin && (
       <div className="add-item-section">
         <h2>Add New Food Item</h2>
         <div className="add-item-form">
@@ -305,6 +368,7 @@ function App() {
           </button>
         </div>
       </div>
+      )}
 
       {/* MENU */}
       <div className="menu-section">

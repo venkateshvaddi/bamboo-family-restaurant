@@ -7,7 +7,11 @@
 
 body {
   margin: 0;
-  background: #f1f8f0;
+  background-color: #f1f8f0;
+  background-image:
+    radial-gradient(circle at 95% 5%, rgba(102, 187, 106, 0.12) 0%, transparent 25%),
+    radial-gradient(circle at 5% 95%, rgba(46, 125, 50, 0.10) 0%, transparent 25%);
+  background-attachment: fixed;
 }
 
 .container {
@@ -52,6 +56,85 @@ body {
 .leaf-right {
   right: 12px;
   transform: translateY(-50%) rotate(20deg) scaleX(-1);
+}
+
+.admin-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(2px);
+}
+
+.admin-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* ADMIN LOGIN MODAL */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+}
+
+.modal-box {
+  background: white;
+  border-radius: 14px;
+  padding: 24px;
+  width: 100%;
+  max-width: 320px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.modal-box h2 {
+  color: #2e7d32;
+  margin-top: 0;
+  text-align: center;
+  font-family: "Baloo 2", cursive;
+}
+
+.modal-box input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  border: 2px solid #a5d6a7;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.modal-box input:focus {
+  outline: none;
+  border-color: #2e7d32;
+}
+
+.login-error {
+  color: #e53935;
+  font-size: 0.85rem;
+  margin: -4px 0 10px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.modal-actions button {
+  flex: 1;
 }
 
 .bamboo-green {
@@ -411,6 +494,13 @@ body {
 
   .leaf-right {
     right: 6px;
+  }
+
+  .admin-btn {
+    position: static;
+    display: block;
+    margin: 10px auto 0;
+    width: fit-content;
   }
 
   .tagline {
